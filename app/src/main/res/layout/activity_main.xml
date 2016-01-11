@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".MainActivity">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/margin">
+
+		<Button
+			android:layout_weight="1"
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:text="@string/str_cxn"
+			android:onClick="onCxnHandler"/>
+
+		<Button
+			android:layout_weight="1"
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:text="@string/str_dxn"
+			android:onClick="onDxnHandler"/>
+
+	</LinearLayout>
+
+	<com.ysong.bluetooth_mpu9250_calibration.calibration.CalibrationGLSurfaceView
+		android:id="@+id/calibration_gl_surface_view"
+		android:layout_weight="1"
+		android:layout_width="match_parent"
+		android:layout_height="0px"
+		style="@style/margin"/>
+
+	<SeekBar
+		android:id="@+id/zoom"
+		android:layout_weight="0"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:max="100"
+		android:progress="50"
+		style="@style/margin"/>
+
+</LinearLayout>

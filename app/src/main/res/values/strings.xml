@@ -1,0 +1,7 @@
+<resources>
+
+	<string name="app_name">bluetooth_mpu9250_calibration</string>
+	<string name="str_cxn">Connect</string>
+	<string name="str_dxn">Disconnect</string>
+
+</resources>
