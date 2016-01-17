@@ -33,12 +33,21 @@ public class MainActivity extends AppCompatActivity {
 					} else {
 						float[] mag = getMag(data);
 						calibration.push(mag);
+						final float[] confirmCenter = calibration.getConfirmCenter();
+						if (confirmCenter != null) {
+							byte[] center = new byte[14];
+							center[0] = 0;
+							center[13] = 10;
+							System.arraycopy(toHex16((int) confirmCenter[0]), 0, center, 1, 4);
+							System.arraycopy(toHex16((int) confirmCenter[1]), 0, center, 5, 4);
+							System.arraycopy(toHex16((int) confirmCenter[2]), 0, center, 9, 4);
+							bluetoothSerial.write(center);
+						}
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								calibrationGLSurfaceView.updatePointCloud(calibration.getPoint());
 								calibrationGLSurfaceView.updateCenter(calibration.getCenter());
-								float[] confirmCenter = calibration.getConfirmCenter();
 								if (confirmCenter != null) {
 									calibrationGLSurfaceView.updateConfirmCenter(confirmCenter);
 								}
@@ -126,6 +135,15 @@ public class MainActivity extends AppCompatActivity {
 			mag[i] = (float) byteToShort(data[i * 2], data[i * 2 + 1]);
 		}
 		return mag;
+	}
+
+	private byte[] toHex16(int x) {
+		byte[] hex = new byte[4];
+		hex[0] = (byte) ((x & 0x0F) + 48);
+		hex[1] = (byte) (((x >> 4) & 0x0F) + 48);
+		hex[2] = (byte) (((x >> 8) & 0x0F) + 48);
+		hex[3] = (byte) (((x >> 12) & 0x0F) + 48);
+		return hex;
 	}
 
 	private void toastShow(String str) {

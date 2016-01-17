@@ -55,12 +55,12 @@ public class BluetoothSerial {
 	private class ReadFrameDelimiterThread implements Runnable {
 		@Override
 		public void run() {
-			boolean frameSynced = true;
+			boolean frameLocked = true;
 			int count = 0;
 			while (threadEnabled) {
 				try {
 					int b = inputStream.read();
-					if (frameSynced) {
+					if (frameLocked) {
 						if (count < frameSize) {
 							buffer[count] = (byte) b;
 							count++;
@@ -70,14 +70,14 @@ public class BluetoothSerial {
 								System.arraycopy(buffer, 0, data, 0, frameSize);
 								readQ.offer(data);
 							} else {
-								frameSynced = false;
+								frameLocked = false;
 							}
 							count = 0;
 						}
 					} else {
 						if (b == FRAME_DELIMITER) {
 							if (count == frameSize) {
-								frameSynced = true;
+								frameLocked = true;
 							}
 							count = 0;
 						} else {
@@ -111,7 +111,7 @@ public class BluetoothSerial {
 				}
 			}
 			if (bluetoothDevice == null) {
-				throw new Exception("Cannot find skin_motion_capture");
+				throw new Exception("Cannot find TS-UC025");
 			} else {
 				try {
 					UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
