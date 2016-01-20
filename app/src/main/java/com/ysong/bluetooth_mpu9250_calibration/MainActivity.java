@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public void onCxnHandler(View view) {
 		try {
-			bluetoothSerial.connect(6);
+			bluetoothSerial.connect(14);
 			toastShow("Connect success");
 			threadEnabled = true;
 			new Thread(new DataThread()).start();
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 	private float[] getMag(byte[] data) {
 		float[] mag = new float[3];
 		for (int i = 0; i < 3; i++) {
-			mag[i] = (float) byteToShort(data[i * 2], data[i * 2 + 1]);
+			mag[i] = (float) byteToShort(data[i * 2 + 8], data[i * 2 + 9]);
 		}
 		return mag;
 	}
