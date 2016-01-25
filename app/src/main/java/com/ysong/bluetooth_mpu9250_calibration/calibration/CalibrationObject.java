@@ -4,7 +4,7 @@ import android.opengl.GLES20;
 
 public abstract class CalibrationObject {
 
-	public static final int MAX_CLOUD = 30;
+	public static final int MAX_CLOUD = 10;
 
 	protected static final int BYTE_PER_FLOAT = 4;
 	protected static final int COORD_PER_VERTEX = 3;

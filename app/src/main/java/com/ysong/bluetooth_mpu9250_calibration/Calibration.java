@@ -4,11 +4,11 @@ public class Calibration {
 
 	private static final float[] ORIGIN = {0.0f, 0.0f, 0.0f};
 	private static final float DISTANCE_MIN = 20.0f;
-	private static final int SAMPLE_MIN = 30;
+	private static final int SAMPLE_MIN = 10;
 	private static final float CONFIRM_DISTANCE_MIN = 5.0f;
 	/* CONFIRM_MIN >= SAMPLE_MIN + CONFIRM_AVG_SIZE */
-	private static final int CONFIRM_MIN = 100;
-	private static final int CONFIRM_AVG_SIZE = 10;
+	private static final int CONFIRM_MIN = 20;
+	private static final int CONFIRM_AVG_SIZE = 5;
 
 	private float[][] point = new float[SAMPLE_MIN][3];
 	private int pointIndex = 0;
